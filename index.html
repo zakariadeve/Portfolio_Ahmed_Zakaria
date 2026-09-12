@@ -124,6 +124,10 @@
 </nav>
 <!-- Action buttons & Theme Switcher -->
 <div class="hidden md:flex items-center gap-3">
+<div aria-label="Choisir la langue" class="flex items-center rounded-lg border border-slate-700 overflow-hidden text-[11px] font-bold" role="group">
+<button class="language-button px-2 py-1.5 bg-cyan-500 text-slate-950" data-language="fr" type="button">FR</button>
+<button class="language-button px-2 py-1.5 text-slate-300 hover:bg-slate-800" data-language="en" type="button">EN</button>
+</div>
 <!-- Theme Toggle -->
 <button aria-label="Changer de thème" class="w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 flex items-center justify-center border border-slate-700 transition" id="theme-toggle">
 <i class="fa-solid fa-sun text-sm hidden dark:inline"></i>
@@ -136,6 +140,10 @@
 </div>
 <!-- Mobile Hamburger Button -->
 <div class="flex items-center gap-2 md:hidden">
+<div aria-label="Choisir la langue" class="flex items-center rounded-lg border border-slate-700 overflow-hidden text-[11px] font-bold" role="group">
+<button class="language-button px-2 py-1.5 bg-cyan-500 text-slate-950" data-language="fr" type="button">FR</button>
+<button class="language-button px-2 py-1.5 text-slate-300 hover:bg-slate-800" data-language="en" type="button">EN</button>
+</div>
 <button class="w-9 h-9 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center border border-slate-700" id="theme-toggle-mobile">
 <i class="fa-solid fa-sun text-sm hidden dark:inline"></i>
 <i class="fa-solid fa-moon text-sm dark:hidden"></i>
@@ -229,7 +237,8 @@
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-1.5 glass-card px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-md shadow-lg transition-all duration-700 opacity-100 translate-y-0 bg-white/95 dark:bg-gray-900/75 border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:border-cyan-500/50"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping absolute"></span><span class="w-2 h-2 rounded-full bg-emerald-400 relative"></span><span class="text-[11px] font-mono font-medium text-slate-200">Rabat, Maroc</span></div></div></div>
       <div class="absolute -top-2 -right-2 glass-card px-3 py-1.5 rounded-full border border-cyan-500/30 flex items-center gap-1.5 shadow-lg animate-bounce z-20 transition-all opacity-100 translate-y-0 bg-white/95 dark:bg-gray-900/75 border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:border-cyan-500/50"
             style="animation-duration: 5s;"><i class="fa-brands fa-laravel text-rose-500 text-base"></i><span class="text-xs font-mono font-semibold text-white">Laravel &amp; PHP</span></div>
-      <div class="absolute -bottom-2 -left-2 glass-card px-3 py-1.5 rounded-full border border-indigo-500/30 flex items-center gap-1.5 shadow-lg z-20 transition-all duration-700 opacity-100 translate-y-0 bg-white/95 dark:bg-gray-900/75 border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:border-cyan-500/50"><i class="fa-brands fa-js text-amber-400 text-base"></i><span class="text-xs font-mono font-semibold text-white">Full Stack JS</span></div></div></div>
+      <div class="absolute -bottom-2 -left-2 glass-card px-3 py-1.5 rounded-full border border-indigo-500/30 flex items-center gap-1.5 shadow-lg animate-bounce z-20 transition-all  opacity-100 translate-y-0 bg-white/95 dark:bg-gray-900/75 border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:border-cyan-500/50"
+            style="animation-duration: 5s;"><i class="fa-brands fa-js text-amber-400 text-base"></i><span class="text-xs font-mono font-semibold text-white">Full Stack JS</span></div></div></div>
 </div>
 </section>
 <!-- 3. ABOUT ME SECTION -->
@@ -1508,6 +1517,217 @@
     modal.classList.remove('opacity-100', 'pointer-events-auto');
     document.body.style.overflow = '';
   }
+</script>
+<script>
+  // Lightweight, local language switcher. No external translation widget is loaded.
+  const originalText = new WeakMap();
+  const englishText = {
+    'Accueil': 'Home', 'À propos': 'About', 'Compétences': 'Skills',
+    'Expériences': 'Experience', 'Projets': 'Projects', 'Éducation': 'Education',
+    'Contact': 'Contact', 'Aperçu CV': 'CV Preview', 'Me Recruter': 'Hire Me',
+    'À Propos de Moi': 'About Me', 'Langages': 'Languages',
+    'Frameworks & Libs': 'Frameworks & Libraries',
+    'BDD & Modélisation': 'Databases & Modelling',
+    'Outils & Environnements de Travail': 'Tools & Work Environments',
+    'Expériences & Stages': 'Experience & Internships', 'Mes Projets': 'My Projects',
+    'Éducation & Diplômes': 'Education & Qualifications',
+    'Langues Maîtrisées': 'Languages', 'Me Contacter': 'Contact Me',
+    'Travaillons ensemble': "Let's work together",
+    'Envoyez-moi un message direct': 'Send me a direct message',
+    'Télécharger PDF': 'Download PDF', 'Télécharger le CV (PDF)': 'Download CV (PDF)',
+    'Fermer': 'Close', 'Curriculum Vitae': 'Curriculum Vitae',
+    'Profil Professionnel': 'Professional Profile',
+    'Formations & Diplômes': 'Education & Qualifications',
+    'Compétences & Langues': 'Skills & Languages',
+    'Projets Réalisés': 'Completed Projects', 'Arabe': 'Arabic',
+    'Français': 'French', 'Anglais': 'English', 'Disponible pour de nouvelles opportunités': 'Available for new opportunities',
+    'Me contacter': 'Contact me', 'Voir mes projets': 'View my projects',
+    'Stage pédagogique — Formateur Bureautique': 'Teaching internship — Office Trainer',
+    'Stage — Développement Web': 'Internship — Web Development',
+    'Stage — Développement Desktop': 'Internship — Desktop Development',
+    'Diplôme de Technicien Spécialisé en Développement Informatique': 'Specialized Technician Diploma in Computer Development',
+    'Baccalauréat en Sciences de la Vie et de la Terre (SVT)': 'Scientific Baccalaureate in Life and Earth Sciences',
+    'Bonjour, je suis': 'Hello, I am', 'Je suis': 'I am',
+    'Développeur Web Full Stack Junior': 'Junior Full-Stack Web Developer',
+    'Développeur Full Stack Junior, titulaire de deux diplômes en Développement Informatique, avec une expérience pratique dans la création de solutions web modernes. Rigoureux, autonome et capable de travailler en équipe.': 'Junior Full-Stack Developer with two qualifications in Computer Development and hands-on experience creating modern web solutions. Thorough, autonomous and able to work effectively in a team.',
+    'Rigoureux et autonome, j\'accorde une importance primordiale à l\'écriture d\'un code propre, à la modélisation rigoureuse des bases de données et au travail collaboratif pour transformer des besoins métier en solutions concrètes.': 'Thorough and autonomous, I place great importance on clean code, rigorous database modelling and teamwork to turn business needs into practical solutions.',
+    'Parcours en Chiffres Clés': 'Key Figures', 'Deux diplômes spécialisés en développement informatique et solide base scientifique.': 'Two specialized qualifications in computer development and a strong scientific foundation.',
+    'Mises en pratique concrètes en institutions publiques et organismes de formation.': 'Hands-on experience in public institutions and training organizations.',
+    'Applications complètes, de la conception architecturale à la mise en œuvre technique.': 'Complete applications, from architectural design to technical implementation.',
+    'Organisées par domaines et appliquées dans mes projets académiques et professionnels.': 'Organized by field and applied in my academic and professional projects.',
+    'Formation Académique': 'Academic Education', 'Parcours Pratique': 'Practical Experience',
+    'Portfolio de Réalisations': 'Project Portfolio', 'Expertise Technique': 'Technical Expertise',
+    'Formateur bureautique, Web & Desktop': 'Office, Web & Desktop Trainer',
+    'Disponible pour opportunités de stage / emploi': 'Available for internship / employment opportunities',
+    'Disponibilité :': 'Availability:', 'Localisation :': 'Location:', 'Mobilité :': 'Mobility:',
+    'Spécialisation approfondie en génie logiciel, développement web & architectures de bases de données.': 'Advanced specialization in software engineering, web development and database architectures.',
+    'Formation axée sur la programmation structurée, le développement applicatif et la modélisation informatique.': 'Training focused on structured programming, application development and computer modelling.',
+    'Filière scientifique renforçant les méthodes d\'analyse, de rigueur et de modélisation mathématique.': 'Scientific curriculum strengthening analytical methods, rigor and mathematical modelling.',
+    'Enseignement Secondaire': 'Secondary Education', 'Diplôme d\'État': 'State Diploma',
+    'Stage pédagogique — Formateur Bureautique': 'Teaching Internship — Office Trainer',
+    'Stage Développeur Web': 'Web Developer Internship', 'Stage Développeur Desktop': 'Desktop Developer Internship',
+    'Enseignement des outils bureautiques (Word, Excel, PowerPoint) aux étudiants débutants.': 'Teaching office tools (Word, Excel, PowerPoint) to beginner students.',
+    'Préparation des supports pédagogiques structurés et conception d\'exercices pratiques d\'évaluation.': 'Preparation of structured teaching materials and practical assessment exercises.',
+    'Intégration d\'interfaces web dynamiques et responsives avec JavaScript, HTML et CSS.': 'Integration of dynamic, responsive web interfaces with JavaScript, HTML and CSS.',
+    'Création d\'un site web dédié à la vente et consultation de livres électroniques.': 'Creation of a website dedicated to selling and browsing e-books.',
+    'Développement d\'une application desktop complète pour la gestion des livres, des emprunts et des utilisateurs.': 'Development of a complete desktop application for managing books, loans and users.',
+    'Conception de l\'architecture de persistance avec Windows Forms, SQL Server et le framework ADO.NET.': 'Design of the persistence architecture with Windows Forms, SQL Server and the ADO.NET framework.',
+    'Plateforme Web de Location d\'Outils': 'Tool Rental Web Platform',
+    'Application web de location d\'outils professionnels permettant aux utilisateurs de publier des annonces, effectuer des réservations et communiquer via une messagerie interne.': 'Professional tool-rental web application allowing users to publish listings, make bookings and communicate through internal messaging.',
+    'Fonctionnalités Clés :': 'Key Features:', 'Points Techniques :': 'Technical Highlights:',
+    'Gestion des annonces': 'Listing Management', 'Réservations': 'Bookings', 'Messagerie interne': 'Internal Messaging',
+    'Authentification sécurisée': 'Secure Authentication', 'Gestion MySQL': 'MySQL Management',
+    'Application Chat Room Multi-utilisateurs': 'Multi-user Chat Room Application',
+    'Application client-serveur robuste permettant la communication interactive et en temps réel entre plusieurs utilisateurs connectés simultanément.': 'Robust client-server application enabling interactive, real-time communication among multiple simultaneously connected users.',
+    'Gestion de threads parallèles pour les flux de messages': 'Parallel thread management for message flows',
+    'Échange de paquets formatés via protocoles JSON et TCP': 'Formatted packet exchange via JSON and TCP protocols',
+    'Site E-commerce Scolaire': 'School E-commerce Website',
+    'Site web responsive destiné à la vente de matériel scolaire avec système de panier interactif et gestion organisée des fiches produits.': 'Responsive website for selling school supplies with an interactive cart and organized product management.',
+    'Catalogue & Gestion Produits': 'Catalogue & Product Management', 'Panier d\'achats': 'Shopping Cart',
+    'Système de gestion de panier et suivi de commande': 'Cart management and order tracking system',
+    'Application ASP.NET Web Forms': 'ASP.NET Web Forms Application',
+    'Application complète avec système d\'authentification (Login / Logout), gestion des sessions et administration rigoureuse des utilisateurs avec base de données.': 'Complete application with authentication (login / logout), session management and rigorous user administration backed by a database.',
+    'Contrôle d\'accès et cycle de vie des sessions utilisateur': 'Access control and user session lifecycle',
+    'Composants serveur et contrôles Web Forms': 'Server components and Web Forms controls',
+    'Discutons de votre projet': 'Let\'s discuss your project',
+    'Vous avez un projet, une opportunité de stage ou d\'emploi ? N\'hésitez pas à me contacter. Je suis prêt à m\'investir au sein de vos équipes pour concevoir des applications web performantes et modernes.': 'Do you have a project or an internship or job opportunity? Feel free to contact me. I am ready to contribute to your teams and build high-performance, modern web applications.',
+    'Un message, une opportunité ou un échange technique ? Je vous réponds dans les plus brefs délais.': 'A message, an opportunity or a technical discussion? I will reply as soon as possible.',
+    'Remplissez ce formulaire, je vous répondrai en moins de 24 heures.': 'Fill in this form and I will reply within 24 hours.',
+    'Envoyer le message': 'Send message', 'Nom complet *': 'Full name *', 'Adresse Email *': 'Email address *',
+    'Sujet *': 'Subject *', 'Message *': 'Message *',
+    'Vos données personnelles restent strictement confidentielles.': 'Your personal data remains strictly confidential.',
+    'Message envoyé avec succès !': 'Message sent successfully!',
+    'Merci de votre prise de contact. Une redirection mailto a été initialisée pour confirmer l\'envoi direct.': 'Thank you for getting in touch. A mailto redirect has been initiated to confirm direct delivery.',
+    'Voir le projet (GitHub)': 'View project (GitHub)', 'Consulter sur GitHub': 'View on GitHub',
+    'En savoir plus sur le projet': 'Learn more about the project',
+    'Tous droits réservés.': 'All rights reserved.',
+    '© 2026 Ahmed Zakaria. Tous droits réservés.': '© 2026 Ahmed Zakaria. All rights reserved.',
+    'Témara, Rabat — Maroc': 'Temara, Rabat — Morocco', 'Témara, Maroc': 'Temara, Morocco',
+    'Rabat, Maroc': 'Rabat, Morocco', 'Rabat-Salé-Kénitra & Remote': 'Rabat-Salé-Kénitra & Remote',
+    'Développement Full Stack': 'Full-Stack Development', 'Développement Web': 'Web Development',
+    'Développement Informatique': 'Computer Development', 'Développe': 'Develops',
+    'Apprentissage continu': 'Continuous Learning', 'Veille technologique active': 'Active Technology Watch',
+    'Communication et esprit collaboratif': 'Communication and Collaborative Spirit',
+    'Résolution de problèmes': 'Problem Solving', 'Travail en équipe': 'Teamwork',
+    'Logique algorithmique et rigueur': 'Algorithmic Thinking and Rigor',
+    'Architecture Complète Full Stack': 'Complete Full-Stack Architecture',
+    'Architecture complète de bout en bout': 'End-to-End Complete Architecture',
+    'Architecture & Sécurité :': 'Architecture & Security:', 'Réseaux :': 'Networks:',
+    'Architecture Client-Serveur Socket': 'Client-Server Socket Architecture',
+    'Communication': 'Communication', 'Authentification': 'Authentication',
+    'Conception': 'Design', 'Gestion responsive': 'Responsive Management',
+    'Responsive & Sémantique': 'Responsive & Semantic Design',
+    'Ergonomie adaptée aux mobiles et tablettes': 'Mobile and Tablet-Friendly Ergonomics',
+    'Sites réactifs & applications modernes': 'Responsive Websites & Modern Applications',
+    'Design Moderne UI': 'Modern UI Design', 'Interactif Vanilla': 'Interactive Vanilla JavaScript',
+    'Environnement Complet': 'Complete Environment', 'Environnement Dev': 'Development Environment',
+    'IDE, gestionnaires de version, serveurs locaux et CMS': 'IDE, version control, local servers and CMS',
+    'Éditeur Principal': 'Main Editor', 'Serveur Local PHP': 'Local PHP Server',
+    'Version Control': 'Version Control', 'Bases de données': 'Databases',
+    'Modélisation UML/MERISE & SQL': 'UML/MERISE & SQL Modelling',
+    'Requêtes & DDL/DML': 'Queries & DDL/DML', 'Calcul des prix': 'Price Calculation',
+    'Communication et transactions fiables avec SQL Server': 'Reliable Communication and Transactions with SQL Server',
+    'Parcours en Chiffres Clés': 'Key Figures', '8 langages': '8 languages',
+    '5 technologies': '5 technologies', '5+': '5+', '3+': '3+',
+    'Diplômes': 'Qualifications', 'Diplôme Spécialisé': 'Specialized Diploma',
+    'En Développement Informatique (ECOSIAM & ISTA)': 'In Computer Development (ECOSIAM & ISTA)',
+    'Pédagogie': 'Teaching', 'Découverte': 'Discovery', 'Immédiate': 'Immediate',
+    'Profils Professionnels': 'Professional Profiles', 'Expériences / Stages': 'Experience / Internships',
+    'Projets & PFE': 'Projects & Final-Year Project', 'PFE Web, Chat Réseau, E-commerce, Desktop': 'Web Final-Year Project, Network Chat, E-commerce, Desktop',
+    'PROJET DE FIN D’ÉTUDES (PFE)': 'FINAL-YEAR PROJECT', 'RÉSEAU & TEMPS RÉEL': 'NETWORK & REAL TIME',
+    'E-COMMERCE & CMS': 'E-COMMERCE & CMS', 'ENTREPRISE & GESTION': 'BUSINESS & MANAGEMENT',
+    'Plateforme de Location d’Outils de Travail': 'Work Tool Rental Platform',
+    'Gestion des annonces': 'Listing Management', 'CRUD complet & Sessions': 'Complete CRUD & Sessions',
+    'Catalogue interactif de fournitures et manuels': 'Interactive Catalogue of Supplies and Textbooks',
+    'Catalogue & Gestion Produits': 'Catalogue & Product Management',
+    'Application C# Windows Forms, ADO.NET, SQL Server gestion de prêts de livres.': 'C# Windows Forms application using ADO.NET and SQL Server to manage book loans.',
+    'PHP, MySQL, Tailwind CSS, JS. Authentification, CRUD, annonces et réservations.': 'PHP, MySQL, Tailwind CSS, JavaScript. Authentication, CRUD, listings and bookings.',
+    'Python, Tkinter, TCP/IP, Sockets, multithreading et JSON.': 'Python, Tkinter, TCP/IP, sockets, multithreading and JSON.',
+    'WordPress, CMS, catalogue de produits et système de panier.': 'WordPress, CMS, product catalogue and cart system.',
+    'Veuillez renseigner votre nom.': 'Please enter your name.',
+    'Veuillez entrer une adresse email valide.': 'Please enter a valid email address.',
+    'Veuillez indiquer le sujet de votre message.': 'Please enter the subject of your message.',
+    'Veuillez rédiger votre message (minimum 10 caractères).': 'Please write your message (at least 10 characters).',
+    'Titulaire de deux diplômes de Technicien Spécialisé en Développement Informatique, j\'ai acquis des compétences solides couvrant à la fois l\'architecture logicielle, le développement backend structuré (PHP, Laravel, ASP.NET, Django) et la conception d\'interfaces web réactives et fluides avec Tailwind CSS et JavaScript.': 'Holder of two Specialized Technician diplomas in Computer Development, I have gained strong skills in software architecture, structured backend development (PHP, Laravel, ASP.NET, Django), and the design of responsive, fluid web interfaces with Tailwind CSS and JavaScript.',
+    'Développeur Full Stack Junior passionné par la création d\'applications web modernes et interactives.': 'Junior Full-Stack Developer passionate about creating modern, interactive web applications.',
+    'Génie logiciel, développement web & architectures de bases de données.': 'Software engineering, web development & database architectures.',
+    'Programmation structurée, développement applicatif et modélisation.': 'Structured programming, application development and modelling.',
+    'Formation Office (Word, Excel, PowerPoint), conception d\'exercices pratiques.': 'Office training (Word, Excel, PowerPoint) and practical exercise design.',
+    'Site web e-books, interfaces responsives JavaScript, HTML5, CSS3.': 'E-book website with responsive JavaScript, HTML5 and CSS3 interfaces.',
+    'Ministère de la Jeunesse, de la Culture et de la Communication — Maroc': 'Ministry of Youth, Culture and Communication — Morocco',
+    'Ministère de la Jeunesse, Culture & Com.': 'Ministry of Youth, Culture & Communication',
+    'Technicien Spécialisé en Dév. Informatique': 'Specialized Technician in Computer Development',
+    'Baccalauréat Scientifique (SVT)': 'Scientific Baccalaureate (Life and Earth Sciences)',
+    'Langue maternelle': 'Native language', 'Intermédiaire': 'Intermediate',
+    'Adresse Email *': 'Email address *', 'Téléphone': 'Phone',
+    'Localisation': 'Location', 'Disponibilité': 'Availability',
+    'Code Source GitHub': 'GitHub Source Code', 'Repos & Code': 'Repositories & Code',
+    'Gestion des annonces': 'Listing Management', 'Authentification sécurisée': 'Secure Authentication',
+    'Sessions & SQL Server': 'Sessions & SQL Server', 'Entreprise / C#': 'Business / C#',
+    'Chat Room & Scripts': 'Chat Room & Scripts', 'Desktop & Web': 'Desktop & Web',
+    'Relationnel / PFE': 'Relational / Final-Year Project', 'Mobile Dev': 'Mobile Development',
+    'Architecture & Sécurité :': 'Architecture & Security:',
+    'Technologies associées :': 'Related Technologies:',
+    'C# / ASP.NET': 'C# / ASP.NET', 'PHP / Laravel': 'PHP / Laravel',
+    'Python / Django': 'Python / Django', 'JavaScript / jQuery': 'JavaScript / jQuery',
+    'MySQL / SQL Server': 'MySQL / SQL Server', 'Git & GitHub': 'Git & GitHub',
+    'Rabat-Salé-Kénitra & Remote': 'Rabat-Salé-Kénitra & Remote',
+    'Témara, Rabat — Maroc • Mobilité : Rabat-Salé-Kénitra & Remote': 'Temara, Rabat — Morocco • Mobility: Rabat-Salé-Kénitra & Remote'
+  };
+  const frenchRoles = [...roles];
+  const englishRoles = [
+    'Junior Full-Stack Developer',
+    'PHP & Laravel Specialist',
+    'JavaScript & Tailwind Developer',
+    'Web Solutions Designer'
+  ];
+
+  // Some legacy text in the document was saved with a Windows encoding.
+  // Normalize it only for dictionary lookup, so both spellings translate.
+  function normalizeFrenchText(value) {
+    return value
+      .replaceAll('Ã©', 'é').replaceAll('Ã¨', 'è').replaceAll('Ãª', 'ê')
+      .replaceAll('Ã ', 'à').replaceAll('Ã´', 'ô').replaceAll('Ã®', 'î')
+      .replaceAll('Ã§', 'ç').replaceAll('Ã‰', 'É').replaceAll('Ã€', 'À')
+      .replaceAll('Ã»', 'û').replaceAll('â€”', '—').replaceAll('â€“', '–')
+      .replaceAll('â€¢', '•').replaceAll('Â©', '©');
+  }
+
+  function setLanguage(language) {
+    roles.splice(0, roles.length, ...(language === 'en' ? englishRoles : frenchRoles));
+    roleIndex = 0;
+    charIndex = 0;
+    isDeleting = false;
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach((node) => {
+      const parent = node.parentElement;
+      if (!parent || ['SCRIPT', 'STYLE'].includes(parent.tagName)) return;
+      if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+      const source = originalText.get(node);
+      const leading = source.match(/^\s*/)[0];
+      const trailing = source.match(/\s*$/)[0];
+      const key = source.trim();
+      const translated = englishText[key] || englishText[normalizeFrenchText(key)];
+      node.nodeValue = leading + (language === 'en' && translated ? translated : key) + trailing;
+    });
+
+    document.documentElement.lang = language;
+    document.querySelectorAll('.language-button').forEach((button) => {
+      const active = button.dataset.language === language;
+      button.classList.toggle('bg-cyan-500', active);
+      button.classList.toggle('text-slate-950', active);
+      button.classList.toggle('text-slate-300', !active);
+    });
+    localStorage.setItem('portfolio-language', language);
+  }
+
+  document.querySelectorAll('.language-button').forEach((button) => {
+    button.addEventListener('click', () => setLanguage(button.dataset.language));
+  });
+  setLanguage(localStorage.getItem('portfolio-language') || 'fr');
 </script>
 </body>
 </html>
