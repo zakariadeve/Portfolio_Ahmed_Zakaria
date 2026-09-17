@@ -1502,9 +1502,34 @@
 
 <script>
   // Keep the page scroll state in sync with the CV modal.
+  function prepareCvPdfPreview(modal) {
+    if (modal.dataset.pdfPreviewReady === 'true') return;
+
+    modal.innerHTML = `
+      <div class="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6">
+          <div class="min-w-0">
+            <h2 class="truncate font-heading text-base font-bold text-slate-900 sm:text-lg" id="cv-modal-title">Curriculum Vitae</h2>
+            <p class="text-xs text-slate-500">Ahmed Zakaria · PDF</p>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <a class="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:shadow-md" download="CV_Ahmed_Zakaria.pdf" href="assets/CV_Ahmed_Zakaria.pdf">
+              <i class="fa-solid fa-download"></i><span class="hidden sm:inline">Télécharger</span>
+            </a>
+            <button aria-label="Fermer l'aperçu CV" class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-rose-50 hover:text-rose-600" onclick="closeCvModal()" type="button">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <iframe class="h-[70vh] w-full bg-slate-100 sm:h-[75vh]" src="assets/CV_Ahmed_Zakaria.pdf#view=FitH" title="Aperçu du CV d'Ahmed Zakaria"></iframe>
+      </div>`;
+    modal.dataset.pdfPreviewReady = 'true';
+  }
+
   function openCvModal() {
     const modal = document.getElementById('cv-modal');
     if (!modal) return;
+    prepareCvPdfPreview(modal);
     modal.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
     modal.classList.add('opacity-100', 'pointer-events-auto');
     document.body.style.overflow = 'hidden';
