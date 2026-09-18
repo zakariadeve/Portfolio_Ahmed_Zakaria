@@ -161,9 +161,7 @@
 <div class="max-w-7xl mx-auto flex items-center justify-between">
 <!-- Logo -->
 <a class="flex items-center gap-3 group" href="#home">
-<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-500 flex items-center justify-center font-heading font-bold text-white shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform">
-          AZ
-        </div>
+<img alt="Photo de profil d'Ahmed Zakaria" class="theme-profile-image w-10 h-10 rounded-3xl object-cover border border-cyan-400/90 shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform" src="pf.png">
 <div class="flex flex-col">
 <span class="font-heading font-bold tracking-tight text-white group-hover:text-brand-400 transition-colors">Ahmed Zakaria</span>
 <span class="text-[11px] font-mono text-cyan-400 tracking-wider">FULL STACK DEV</span>
@@ -288,7 +286,7 @@
     <div class="absolute -inset-3 rounded-full bg-gradient-to-tr from-cyan-500/25 via-indigo-500/20 to-emerald-500/20 blur-2xl opacity-75 pointer-events-none"></div>
     <div class="relative rounded-full p-2.5 glass-card border border-cyan-500/30 shadow-2xl glow-cyan transition-all duration-700 opacity-100 translate-y-0 bg-white/95 dark:bg-gray-900/75 border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:border-cyan-500/50"><div class="relative rounded-full overflow-hidden aspect-square w-72 sm:w-80 border-2 border-cyan-400/40 bg-slate-900 group shadow-inner">
       <img alt="Portrait professionnel de Ahmed Zakaria, Développeur Web Full Stack"
-       class="w-full h-full object-cover object-center rounded-full transform group-hover:scale-105 transition-transform duration-700" 
+        class="theme-profile-image w-full h-full object-cover object-center rounded-full transform group-hover:scale-105 transition-transform duration-700" 
             src="pf.png">
       <div class="absolute inset-0 rounded-full bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none"></div>
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-1.5 glass-card px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-md shadow-lg transition-all duration-700 opacity-100 translate-y-0 bg-white/95 dark:bg-gray-900/75 border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-none hover:shadow-xl hover:shadow-cyan-500/10 dark:hover:border-cyan-500/50"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping absolute"></span><span class="w-2 h-2 rounded-full bg-emerald-400 relative"></span><span class="text-[11px] font-mono font-medium text-slate-200">Rabat, Maroc</span></div></div></div>
@@ -1316,9 +1314,8 @@
 <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
 <!-- Brand in Footer -->
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-500 flex items-center justify-center font-heading font-bold text-white text-sm">
-          AZ
-        </div>
+<img alt="Photo de profil d'Ahmed Zakaria" class="theme-profile-image w-10 h-10 rounded-3xl object-cover border border-cyan-400/90 shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform" src="pf.png">
+
 <div>
 <span class="font-heading font-bold text-white block">Ahmed Zakaria</span>
 <span class="text-xs text-cyan-400 font-mono">Développeur Web Full Stack Junior</span>
@@ -1454,15 +1451,25 @@
       htmlElement.classList.add("light");
     }
 
+    function updateThemeProfileImages(theme) {
+      document.querySelectorAll(".theme-profile-image").forEach((image) => {
+        image.src = theme === "light" ? "pfL.png" : "pf.png";
+      });
+    }
+
+    updateThemeProfileImages(savedTheme === "light" ? "light" : "dark");
+
     function toggleTheme() {
       if (htmlElement.classList.contains("dark")) {
         htmlElement.classList.remove("dark");
         htmlElement.classList.add("light");
         localStorage.setItem("theme", "light");
+        updateThemeProfileImages("light");
       } else {
         htmlElement.classList.remove("light");
         htmlElement.classList.add("dark");
         localStorage.setItem("theme", "dark");
+        updateThemeProfileImages("dark");
       }
     }
 
